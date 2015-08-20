@@ -56,6 +56,8 @@ module Funk
 		end
 
 		def spawn_at entity, x, y
+			entity.x = x
+			entity.y = y
 			entity.set_world self
 
 			@entities.push entity
