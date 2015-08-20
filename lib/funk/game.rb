@@ -16,6 +16,9 @@ module Funk
 
 				Ncurses.cbreak
 
+				player = Entity.new
+				@world.spawn_at player, 10, 10
+
 				draw
 
 				while (ch = @window.getch) != 'q'.ord
@@ -35,7 +38,11 @@ module Funk
 		end
 
 		def draw
+			@window.clear
+
 			@world.draw @window
+
+			@window.refresh
 		end
 	end
 end

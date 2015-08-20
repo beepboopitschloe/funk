@@ -13,6 +13,7 @@ module Funk
 				end
 			end
 
+			# @TODO more efficient data structure, quadtree or something
 			@entities = []
 		end
 
@@ -35,6 +36,18 @@ module Funk
 
 			@entities.each do |ent|
 				ent.draw window
+			end
+		end
+
+		def spawn_at entity, x, y
+			entity.set_world self
+
+			@entities.push entity
+		end
+
+		def get_entities x, y, exclude = nil
+			@entities.select do |ent|
+				ent != exclude && ent.x == x && ent.y == y
 			end
 		end
 	end

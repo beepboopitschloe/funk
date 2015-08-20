@@ -7,6 +7,12 @@ module Funk
 			@y = 0
 
 			@glyph = '@'
+
+			@world = nil
+		end
+
+		def set_world world
+			@world = world	
 		end
 
 		def draw window
@@ -17,8 +23,31 @@ module Funk
 			colors.default
 		end
 
-		def update input
+		def move dx, dy
+			tx = @x + dx
+			ty = @y + dy
 
+			other = @world.get_entities tx, ty, exclude = self
+
+			if other.length > 0
+				# don't move, do something with collision
+			else
+				@x = tx
+				@y = ty
+			end
+		end
+
+		def update input
+			case input
+				when Ncurses::KEY_UP
+					move 0, -1
+				when Ncurses::KEY_DOWN
+					move 0, 1
+				when Ncurses::KEY_LEFT
+					move -1, 0
+				when Ncurses::KEY_RIGHT
+					move 1, 0
+			end
 		end
 	end
 end

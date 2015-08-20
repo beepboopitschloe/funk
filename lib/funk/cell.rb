@@ -4,13 +4,10 @@ module Funk
 
 		def initialize
 			@terrain = 'grass'
-
-			@contents = Array.new
 		end
 
 		def draw window
-			# use terrain as bg color, first content item as glyph
-
+			# @TODO draw terrain as bg color
 		end
 	end
 end
