@@ -3,11 +3,18 @@ module Funk
 		attr_accessor :terrain, :contents
 
 		def initialize
-			@terrain = 'grass'
+			@terrain = :grass
 		end
 
-		def draw window
-			# @TODO draw terrain as bg color
+		def draw x, y, window
+			glyph = '.'
+
+			case @terrain
+				when :grass
+					glyph = ','
+			end
+
+			window.mvaddstr x, y, glyph
 		end
 	end
 end

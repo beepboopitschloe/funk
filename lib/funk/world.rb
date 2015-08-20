@@ -1,6 +1,9 @@
 module Funk
 	class World
 		def initialize width = 128, height = 128
+			@width = width
+			@height = height
+
 			# set up the nested map array
 			# @map[row][col][cell_contents]
 			@map = Array.new(width)
@@ -27,14 +30,27 @@ module Funk
 			end
 		end
 
-		def draw window
-			@map.each do |row|
-				row.each do |cell|
-					cell.draw window
+		def make_dirty_region cx, cy, radius = 2
+			{
+				:x => [cx - radius, 0].min,
+				:y => [cy - radius, 0].min,
+				:w => [cx + radius, @width - 1].max,
+				:h => [cy + radius, @height - 1].max
+			}
+		end
+
+		def draw_region window, region
+			for x in region[:x]..region[:w]
+				for y in region[:y]..region[:h]
+					@map[x][y].draw x, y, window
 				end
 			end
+		end
 
+		def draw window
 			@entities.each do |ent|
+				draw_region(window, make_dirty_region(ent.x, ent.y))
+
 				ent.draw window
 			end
 		end

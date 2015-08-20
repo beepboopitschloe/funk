@@ -38,7 +38,7 @@ module Funk
 		end
 
 		def draw
-			@window.clear
+			# @window.clear
 
 			@world.draw @window
 
