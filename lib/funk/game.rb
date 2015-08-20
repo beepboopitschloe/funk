@@ -2,14 +2,13 @@ module Funk
 	class Game
 		def initialize
 			@window = nil
-
-			@px = 10
-			@py = 10
+			@world = nil
 		end
 		
 		def run
 			begin
 				@window = Ncurses.initscr
+				@world = Funk::World.new
 				
 				Ncurses.noecho()
 				Ncurses.curs_set(0)
@@ -21,6 +20,8 @@ module Funk
 
 				while (ch = @window.getch) != 'q'.ord
 					update ch
+
+					draw
 				end
 			ensure
 				Ncurses.endwin
@@ -30,26 +31,11 @@ module Funk
 		private
 
 		def update input
-			case input
-				when Ncurses::KEY_DOWN
-					@py += 1
-				when Ncurses::KEY_UP
-					@py -= 1
-				when Ncurses::KEY_RIGHT
-					@px += 1
-				when Ncurses::KEY_LEFT
-					@px -= 1
-			end
-
-			draw
+			@world.update input
 		end
 
 		def draw
-			@window.clear
-
-			@window.mvaddstr @py, @px, '@'
-
-			@window.refresh
+			@world.draw @window
 		end
 	end
 end
