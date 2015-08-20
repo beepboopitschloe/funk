@@ -4,6 +4,7 @@ module Funk
 			super
 
 			@glyph = 'X'
+			@color_fg = Ncurses::COLOR_WHITE
 		end
 
 		def passable?

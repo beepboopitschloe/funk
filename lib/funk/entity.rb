@@ -2,11 +2,12 @@ module Funk
 	class Entity
 		attr_accessor :x, :y, :glyph
 
-		def initialize
-			@x = 0
-			@y = 0
+		def initialize x = 0, y = 0, glyph = '@', color = Ncurses::COLOR_WHITE
+			@x = x
+			@y = y
 
-			@glyph = '@'
+			@glyph = glyph
+			@color = color
 
 			@world = nil
 		end
@@ -16,11 +17,9 @@ module Funk
 		end
 
 		def draw window
-			colors = Funk::Colors.instance
-
-			colors.set(Ncurses::COLOR_RED, Ncurses::COLOR_BLUE)
+			COLORS.set(@color, Ncurses::COLOR_BLACK)
 			window.mvaddstr @y, @x, @glyph
-			colors.default
+			COLORS.default
 		end
 
 		def move dx, dy

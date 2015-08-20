@@ -4,6 +4,7 @@ module Funk
 			super
 
 			@glyph = ','
+			@color_fg = Ncurses::COLOR_GREEN
 		end
 	end
 end

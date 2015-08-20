@@ -9,10 +9,11 @@ module Funk
 			begin
 				@window = Ncurses.initscr
 				@world = Funk::World.new
-				
-				Ncurses.noecho()
-				Ncurses.curs_set(0)
-				Ncurses.keypad(@window, true)
+
+				Ncurses.noecho
+				Ncurses.start_color
+				Ncurses.curs_set 0
+				Ncurses.keypad @window, true
 
 				Ncurses.cbreak
 

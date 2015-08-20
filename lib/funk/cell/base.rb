@@ -1,9 +1,9 @@
 module Funk
 	class Cell
-		attr_accessor :terrain
-
 		def initialize
 			@glyph = '.'
+			@color_fg = Ncurses::COLOR_WHITE
+			@color_bg = Ncurses::COLOR_BLACK
 		end
 
 		def passable?
@@ -11,7 +11,9 @@ module Funk
 		end
 
 		def draw x, y, window
+			COLORS.set(@color_fg, @color_bg)
 			window.mvaddstr x, y, @glyph
+			COLORS.default
 		end
 	end
 end

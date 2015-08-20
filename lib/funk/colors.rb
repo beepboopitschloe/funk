@@ -30,7 +30,7 @@ module Funk
 		end
 
 		def default
-			set Ncurses::COLOR_BLACK, Ncurses::COLOR_WHITE
+			set Ncurses::COLOR_WHITE, Ncurses::COLOR_BLACK
 		end
 	end
 end

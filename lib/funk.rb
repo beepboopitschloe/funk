@@ -12,5 +12,6 @@ require "funk/cell/cell"
 
 module Funk
 	LOGGER = Logger.new "game.log"
+	COLORS = Colors.instance
 end
 
