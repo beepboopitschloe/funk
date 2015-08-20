@@ -12,16 +12,21 @@ module Funk
 				@map[i] = Array.new(height)
 
 				for k in 0..(height-1)
-					@map[i][k] = Funk::Cell.new
+					cell = nil
+
+					case k % 4 + i % 4
+						when 0
+							cell = Wall.new
+						else
+							cell = Grass.new
+					end
+
+					@map[i][k] = cell
 				end
 			end
 
 			# @TODO more efficient data structure, quadtree or something
 			@entities = []
-		end
-
-		def cell_at x, y
-			@map[x][y]
 		end
 
 		def update input
@@ -61,6 +66,10 @@ module Funk
 			entity.set_world self
 
 			@entities.push entity
+		end
+
+		def get_cell x, y
+			@map[y][x]
 		end
 
 		def get_entities x, y, exclude = nil

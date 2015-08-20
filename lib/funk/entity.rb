@@ -27,9 +27,10 @@ module Funk
 			tx = @x + dx
 			ty = @y + dy
 
+			target = @world.get_cell tx, ty
 			other = @world.get_entities tx, ty, exclude = self
 
-			if other.length > 0
+			if not target.passable? or other.length > 0
 				# don't move, do something with collision
 			else
 				@x = tx
